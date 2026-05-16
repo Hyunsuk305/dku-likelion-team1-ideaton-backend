@@ -1,0 +1,68 @@
+spring:
+  profiles:
+    active: local
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/memoreal?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: ${KAKAO_CLIENT_ID}
+            client-secret: ${KAKAO_CLIENT_SECRET}
+            redirect-uri: "{baseUrl}/login/oauth2/code/kakao"
+            authorization-grant-type: authorization_code
+            client-authentication-method: client_secret_post
+            client-name: Kakao
+            scope:
+              - profile_nickname
+              - profile_image
+              - account_email
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+
+jwt:
+  secret: ${JWT_SECRET:memoreal-secret-key-must-be-at-least-256-bits-long-for-hs256}
+  expiration: 86400000       # 24시간 (ms)
+  refresh-expiration: 604800000  # 7일 (ms)
+
+logging:
+  level:
+    com.memoreal: DEBUG
+    org.springframework.security: DEBUG
+
+# ── AI / STT 설정 ────────────────────────────────────────────────────────
+openai:
+  api-key: ${OPENAI_API_KEY}
+  model: gpt-4o
+  max-tokens: 1000
+
+clova:
+  api-url: https://clovaspeech-gw.ncloud.com/recog/v1/stt
+  secret-key: ${CLOVA_SECRET_KEY}
+  language: Kor
+
+# 음성 파일 업로드 크기 제한
+spring:
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB

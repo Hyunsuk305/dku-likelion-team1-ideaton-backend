@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+    <envs>
+      <env name="KAKAO_CLIENT_ID" value="169655f7c47d464c8c76116a0057c71f" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.memoreal.MemorealApplication" />
+    <module name="memoreal.main" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
