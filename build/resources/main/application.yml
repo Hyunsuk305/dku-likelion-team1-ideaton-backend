@@ -1,6 +1,10 @@
 spring:
   profiles:
     active: local
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB  
 
   datasource:
     url: jdbc:mysql://localhost:3306/memoreal?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
@@ -48,3 +52,14 @@ logging:
   level:
     com.memoreal: DEBUG
     org.springframework.security: DEBUG
+
+# ── AI / STT 설정 ────────────────────────────────────────────────────────
+openai:
+  api-key: ${OPENAI_API_KEY:none}
+  model: gpt-4o
+  max-tokens: 1000
+
+clova:
+  api-url: https://clovaspeech-gw.ncloud.com/recog/v1/stt
+  secret-key: ${CLOVA_SECRET_KEY:none}
+  language: Kor

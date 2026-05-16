@@ -1,0 +1,6 @@
+# .gitignore
+.gradle/
+build/
+*.class
+.env
+application-local.yml
